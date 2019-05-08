@@ -52,7 +52,7 @@ $(document).ready(function(){
 });
 
 function loadMap() {
-   $.getJSON( "./json/map.json", function(data) {
+   $.getJSON( "./json/map-small.json", function(data) {
       console.log( "success" ,data);
       map = data;
       onload();
@@ -78,12 +78,12 @@ function onload()
 	canvas = document.getElementById('gameCanvas');
 	canvas.width = worldWidth * tileWidth;
 	canvas.height = worldHeight * tileHeight;
-	canvas.addEventListener("click", canvasClick, false);
+   canvas.addEventListener("click", canvasClick, false);
 	if (!canvas) alert('Blah!');
 	ctx = canvas.getContext("2d");
 	if (!ctx) alert('Hmm!');
 	spritesheet = new Image();
-	spritesheet.src = './img/floor.png';
+	spritesheet.src = './img/floor-small.png';
 	spritesheet.onload = loaded;
 }
 
@@ -174,10 +174,8 @@ function redraw()
 	}
 
    //draw kiosk
-   console.log("kiosks",kiosks);
-   console.log("drawing kiosk",kiosks.k1.sx,kiosks.k1.sy,tileWidth,tileHeight);
    ctx.drawImage(spritesheet,
-      kiosks.k1.sx, kiosks.k1.sy,
+      kiosks.k1.sx*tileWidth, kiosks.k1.sy*tileHeight,
       tileWidth, tileHeight,
       kiosks.k1.x*tileWidth, kiosks.k1.y*tileHeight,
       tileWidth, tileHeight);
